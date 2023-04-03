@@ -3,9 +3,12 @@
 
 
 class Rectangle:
+    """ Rectangle class"""
     number_of_instances = 0
+    """int: number of instances"""
 
     print_symbol = "#"
+    """any type: symbol for printing rectangle"""
 
     def __init__(self, width=0, height=0):
         self.width = width
@@ -51,8 +54,10 @@ class Rectangle:
                 self.__height)[:-1]
 
     def __repr__(self):
+        '''Returns formal string representation...'''
         return "Rectangle(" + str(self.width) + ", " + str(self.height) + ")"
 
     def __del__(self):
+        """Called when deleting an instance of rectangle"""
         Rectangle.number_of_instances -= 1
         print("Bye rectangle...")
