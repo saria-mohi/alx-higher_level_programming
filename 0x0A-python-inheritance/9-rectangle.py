@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""
+"""rectangle.
 Creates a Rectangle class.
 """
 
@@ -8,7 +8,7 @@ BaseGeometry = __import__('7-base_geometry').BaseGeometry
 
 
 class Rectangle(BaseGeometry):
-    """class a rectangle.
+    """Represents a rectangle.
     Private instance attributes:
         - width
         - height
