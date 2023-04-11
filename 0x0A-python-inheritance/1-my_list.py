@@ -4,10 +4,12 @@
 
 
 class MyList(list):
-    """ assume that all the elements of the list will be of type 
+    """_A class that inherits from list
+    Args:
+        list (_type_): _description_
     """
     def print_sorted(self):
-        """Prints the  list
+        """Prints the sorted list
         """
         new_list = self[:]
         new_list.sort()
