@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""rectangle.
+"""Module 9-rectangle.
 Creates a Rectangle class.
 """
 
