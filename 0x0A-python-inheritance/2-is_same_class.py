@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""same_class
+""" same_class
 """
 
 
 def is_same_class(obj, a_class):
-    """function that returns if the object is exactly an instance of the specified class or no
+    """Checks if an object is an instance of a class or not
     Args:
         obj (_object): _description_
         a_class (class): _description_
