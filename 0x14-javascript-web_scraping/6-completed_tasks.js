@@ -1,29 +1,17 @@
 #!/usr/bin/node
-// print total task complete
+// computes numner of tasks completed by user id
 const request = require('request');
-
-const apiUrl = 'https://jsonplaceholder.typicode.com/todos';
-
-request(apiUrl, function(error, response, body) {
-  if (error) {
-    console.error(error);
-  } else if (response.statusCode === 200) {
-    const completed = {};
-    const tasks = JSON.parse(body);
-    for (const i in tasks) {
-      const task = tasks[i];
-      if (task.completed === true) {
-        if (completed[task.userId] === undefined) {
-          completed[task.userId] = 1;
-        } else {
-          completed[task.userId]++;
-        }
+request(process.argv[2], (error, response, body) => {
+  if (error) throw new Error(error);
+  const tasks = JSON.parse(body);
+  const users = {};
+  tasks.forEach(task => {
+    if (task.completed) {
+      if (!users[task.userId.toString()]) {
+        users[task.userId.toString()] = 0;
       }
+      users[task.userId.toString()] += 1;
     }
-    for (const userId in completed) {
-      console.log(`User ${userId} completed ${completed[userId]} tasks.`);
-    }
-  } else {
-    console.log(`Error: ${response.statusCode}`);
-  }
+  });
+  console.log(users);
 });
