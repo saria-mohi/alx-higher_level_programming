@@ -1,17 +1,26 @@
 #!/usr/bin/node
-// computes numner of tasks completed by user id
+// print total task complete
 const request = require('request');
-request(process.argv[2], (error, response, body) => {
-  if (error) throw new Error(error);
-  const tasks = JSON.parse(body);
-  const users = {};
-  tasks.forEach(task => {
-    if (task.completed) {
-      if (!users[task.userId.toString()]) {
-        users[task.userId.toString()] = 0;
+const url = process.argv[2];
+
+request(url, function (err, response, body) {
+  if (err) {
+    console.log(err);
+  } else if (response.statusCode === 200) {
+    const completed = {};
+    const tasks = JSON.parse(body);
+    for (const i in tasks) {
+      const task = tasks[i];
+      if (task.completed === true) {
+        if (completed[task.userId] === undefined) {
+          completed[task.userId] = 1;
+        } else {
+          completed[task.userId]++;
+        }
       }
-      users[task.userId.toString()] += 1;
     }
-  });
-  console.log(users);
+    console.log(completed);
+  } else {
+    console.log('An error occured. Status code: ' + response.statusCode);
+  }
 });
