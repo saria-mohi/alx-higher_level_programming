@@ -2,24 +2,19 @@
 // print total task complete
 
 const request = require('request');
-const API_URL = process.argv[2];
 
-request(API_URL, function (err, response, body) {
-  if (err) {
-    throw new Error(err);
-  } else {
-    const userCompletedTasks = {};
-    newBody = JSON.parse(body);
-
-    for (let i = 0; i < newBody.length; i++) {
-      const userId = body[i].userId;
-      const completed = body[i].completed;
-
-      if (completed && !userCompletedTasks[userId]) {
-        userCompletedTasks[userId] = 0;
+request(process.argv[2], function (error, response, body) {
+  if (error) console.error(error);
+  const todos = JSON.parse(body);
+  const usersCompleted = {};
+  for (const todo of todos) {
+    if (todo.completed === true) {
+      if (todo.userId in usersCompleted) {
+        usersCompleted[todo.userId] += 1;
+      } else {
+        usersCompleted[todo.userId] = 1;
       }
-       if (completed) ++userCompletedTasks[userId];
     }
-    console.log(userCompletedTasks);
   }
+  console.log(usersCompleted);
 });
