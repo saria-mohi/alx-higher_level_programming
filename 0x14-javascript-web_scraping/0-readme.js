@@ -10,8 +10,4 @@ fs.readFile(process.argv[2], 'utf-8', function (err, data) {
   } else {
     console.log(data);
   }
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> 1c163d494b10087e5793a992432e02c191fe48b7
