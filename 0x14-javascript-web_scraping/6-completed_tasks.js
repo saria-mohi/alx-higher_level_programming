@@ -2,9 +2,9 @@
 // script that computes the number of tasks completed by user id.
 
 const request = require('request');
-const url = process.argv[2];
+const API_URL = process.argv[2];
 
-request(url, function (err, response, body) {
+request(API_URL, function (err, response, body) {
   if (err) {
     throw new Error(err);
   } else {
