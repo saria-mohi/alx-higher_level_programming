@@ -1,12 +1,12 @@
 #!/usr/bin/node
 // print total task complete
-import request from 'request';
+const request = require('request');
 
-const url = process.argv[2];
+const apiUrl = 'https://jsonplaceholder.typicode.com/todos';
 
-request(url, function (err, response, body) {
-  if (err) {
-    console.log(err);
+request(apiUrl, function(error, response, body) {
+  if (error) {
+    console.error(error);
   } else if (response.statusCode === 200) {
     const completed = {};
     const tasks = JSON.parse(body);
@@ -16,12 +16,14 @@ request(url, function (err, response, body) {
         if (completed[task.userId] === undefined) {
           completed[task.userId] = 1;
         } else {
-          completed[task.userId]+= 1;
+          completed[task.userId]++;
         }
       }
     }
-    console.log(completed);
+    for (const userId in completed) {
+      console.log(`User ${userId} completed ${completed[userId]} tasks.`);
+    }
   } else {
-    console.log('An error occured. Status code: ' + response.statusCode);
+    console.log(`Error: ${response.statusCode}`);
   }
 });
