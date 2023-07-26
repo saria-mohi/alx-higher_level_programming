@@ -1,25 +1,26 @@
 #!/usr/bin/node
 // script that computes the number of tasks completed by user id.
-
 const request = require('request');
-const API_URL = process.argv[2];
+const url = process.argv[2];
 
-request(API_URL, function (err, response, body) {
+request(url, function (err, response, body) {
   if (err) {
-    throw new Error(err);
-  } else {
-    const userCompletedTasks = {};
-    newBody = JSON.parse(body);
-
-    for (let i = 0; i < newBody.length; i++) {
-      const userId = body[i].userId;
-      const completed = body[i].completed;
-
-      if (completed && !userCompletedTasks[userId]) {
-        userCompletedTasks[userId] = 0;
+    console.log(err);
+  } else if (response.statusCode === 200) {
+    const completed = {};
+    const tasks = JSON.parse(body);
+    for (const i in tasks) {
+      const task = tasks[i];
+      if (task.completed === true) {
+        if (completed[task.userId] === undefined) {
+          completed[task.userId] = 1;
+        } else {
+          completed[task.userId]++;
+        }
       }
-       if (completed) ++userCompletedTasks[userId];
     }
-    console.log(userCompletedTasks);
+    console.log(completed);
+  } else {
+    console.log('An error occured. Status code: ' + response.statusCode);
   }
 });
