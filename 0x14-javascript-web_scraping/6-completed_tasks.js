@@ -1,8 +1,5 @@
 #!/usr/bin/node
-// print total task complete
-
 const request = require('request');
-
 request(process.argv[2], function (error, response, body) {
   if (error) console.error(error);
   const todos = JSON.parse(body);
