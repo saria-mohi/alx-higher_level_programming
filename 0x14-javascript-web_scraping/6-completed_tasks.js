@@ -19,8 +19,8 @@ request(url, function (err, response, body) {
         }
       }
     }
-    for (const userId in completed) {
-      console.log(`User ${userId} completed ${completed[userId]} tasks.`);
-    }
+    console.log(completed);
+  } else {
+    console.log('An error occured. Status code: ' + response.statusCode);
   }
 });
