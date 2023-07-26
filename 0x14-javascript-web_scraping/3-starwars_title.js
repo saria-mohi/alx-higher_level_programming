@@ -1,8 +1,9 @@
 #!/usr/bin/node
 
 const request = require('request');
+const API_URL = process.argv[2];
 
-request(process.argv[2], function (err, response, body) {
+request(API_URL, function (err, response, body) {
   if (err) {
     throw new Error(err);
   } else {
